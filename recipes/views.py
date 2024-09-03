@@ -4,6 +4,8 @@ from .models import *
 from .serializers import *
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.filters import SearchFilter,OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -22,6 +24,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter] 
+    search_fields = ['title', 'description', 'ingredients']
+    ordering_fields = ['created_at', 'cooking_time', 'prep_time']
+    filterset_fields = ['category', 'difficulty']
     
     def perform_create_recipe(self,serializer):
             #    Associates the recipe with the currently authenticated user when creating.
