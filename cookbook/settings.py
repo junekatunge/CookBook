@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'recipes',
     'rest_framework',
     'django_filters',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +69,9 @@ REST_FRAMEWORK = {
     ),
     'RENDER_FORM': False,  # Disable form rendering
 }
-
+# social auutthentication with google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'your_google_client_id'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your_google_client_secret'
 
 TEMPLATES = [
     {
